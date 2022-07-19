@@ -1,0 +1,61 @@
+ <input
+        placeholder="Name..."
+        onChange={(event) => {
+          setNewName(event.target.value);
+        }}
+      />
+      <input
+        type="number"
+        placeholder="Age..."
+        onChange={(event) => {
+          setNewAge(event.target.value);
+        }}
+      />
+
+      <button onClick={createUser}> Create User</button>
+      {users.map((user) => {
+        return (
+          <div>
+            {" "}
+            <h1>Name: {user.name}</h1>
+            <h1>Age: {user.age}</h1>
+            
+            <button
+              onClick={() => {
+                updateUser(user.id, user.age);
+              }}
+            >
+              {" "}
+              Increase Age
+            </button>
+            <button
+              onClick={() => {
+                deleteUser(user.id);
+              }}
+            >
+              {" "}
+              Delete User
+            </button>
+          </div>
+        );
+      })}
+      {/* <img 
+      src="https://firebasestorage.googleapis.com/v0/b/website-3feaf.appspot.com/o/4f32b-16486378788659-1920.webp?alt=media&token=2963b3a3-4476-458e-aaed-c2513760344b"
+      alt="new"
+      /> */}
+      {companys.map((company) => {
+        return (
+          <div>
+            {" "}
+            <h1>Name: {company.name}</h1>
+            <img
+            src={company.logo}
+            alt="new"
+            />
+            
+          </div>
+        );
+      }
+      )}
+      <h1>vyvhk</h1>
+      
