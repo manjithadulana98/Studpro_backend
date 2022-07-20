@@ -30,6 +30,7 @@ function Upload() {
 
 
   const createCompany = async () => {
+      console.log("Start Uploading.....");
     await addDoc(CompanyColltectionRef, { name: newName, years: newYear ,  logo: url ,details: newDetails});
     
   };

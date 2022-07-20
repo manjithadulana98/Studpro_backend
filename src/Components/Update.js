@@ -50,40 +50,22 @@ function Update() {
     
   };
 
-  const updateUser = async (id, age) => {
-    const userDoc = doc(db, "users", id);
-    const newFields = { age: age + 1 };
+  const updateUser = async (id, newName,newYear,newDetails) => {
+    console.log("Updating..........  ")
+    const userDoc = doc(db, "Sponsors", id);
+    const newFields = { name: newName.toString(), years: newYear.toString()  ,details: newDetails.toString() };
     await updateDoc(userDoc, newFields);
+    console.log("Updated ")
   };
 
   const deleteCompany= async (id) => {
+    console.log("Updating........... ")
     const userDoc = doc(db, "Sponsors", id);
     await deleteDoc(userDoc);
+    console.log("Deleted ")
   };
 
-  const uploadFile = () => {
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      const progress = (snapshot.byteTransferred /snapshot.totalBytes)*100;
-      console.log(progress + "% done ");
-      
-      switch(snapshot.state){
-        case 'paused':
-          console.log("upload is paused")
-        case 'running':
-          console.log("Upload is running");
-          break;
-      }
-      getDownloadURL(snapshot.ref).then((url) => {
-        // setImageUrls((prev) => [...prev, url]);
-        
-        setImageUrl(url);
-        console.log('File available at' , {imageUrl});
-        alert("Uploaded");
-      });
-    });
-  };
+
 
   useEffect(() => {
     const getUsers = async () => {
@@ -128,27 +110,61 @@ function Update() {
 
       <button onClick={createCompany}> Add Company</button>
 
-      <input
-        type="file"
-        onChange={(event) => {
-          setImageUpload(event.target.files[0]);
-        }}
-      />
-      <button onClick={uploadFile}> Upload Image</button>
-
+      
       <div>
         <h1>Update and Delete Company Cards</h1>
       {companys.map((items) => {
         return(
-        <><h>{items.name}</h><button
-          onClick={() => {
+        <>
+        <div></div>
+        <h>{items.name}</h>
+            
+        
+        <div>
+        <input
+        placeholder="Name..."
+        onChange={(event) => {
+          setNewName(event.target.value);
+        }}
+      />
+      </div> 
+      <div>
+      <input
+        placeholder="details ...."
+        onChange={(event) => {
+          setNewDetails(event.target.value);
+        }}
+      />
+      </div>
+      <div>
+      <input
+        placeholder="years..."
+        onChange={(event) => {
+          setNewYear(event.target.value);
+        }}
+      />
+      </div>
+
+      <button onClick={() => {
+                updateUser(items.id,newName,newYear,newDetails);
+              } }> 
+      Update Card 
+      </button>
+
+<button
+              onClick={() => {
                 deleteCompany(items.id);
-              }}
+              } }
             >
               {" "}
               Delete User
 
-          </button></>
+            </button>
+      
+      </>
+          
+
+          
         
         
         )
