@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { useState, useEffect } from "react";
 import { Container, Navbar,Nav, NavDropdown } from 'react-bootstrap';
 import { storage } from "../firebase-config";
@@ -28,7 +29,7 @@ function Update() {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrl , setImageUrl] = useState("");
     
-  const [newAge, setNewAge] = useState(0);
+  const [newAge, setNewAge] = useState("");
 
   const [users, setUsers] = useState([]);
   const [companys, setCompanys] = useState([]);
@@ -80,9 +81,70 @@ function Update() {
     getUsers();
     getCompany();
   }, [usersCollectionRef,CompanyColltectionRef]);
+
+  const [selected, setSelected] = useState(companys.id);
+
+  const handleChange = event => {
+    console.log(event.target.value);
+    setSelected(event.target.value);
+  };
  
   return (
     <div>
+      <div>
+      <select value={selected} onChange={handleChange}>
+        {companys.map(option => (
+          <><option key={option.id} value={option.id}>
+            {option.name}
+          </option></>
+          
+        ))}
+      </select>
+
+      <div>
+        <input
+        placeholder="Name..."
+        onChange={(event) => {
+          setNewName(event.target.value);
+        }}
+      />
+      </div> 
+      <div>
+      <input
+        placeholder="details ...."
+        onChange={(event) => {
+          setNewDetails(event.target.value);
+        }}
+      />
+      </div>
+      <div>
+      <input
+        placeholder="years..."
+        onChange={(event) => {
+          setNewYear(event.target.value);
+        }}
+      />
+      </div>
+      <button onClick={() => {
+                updateUser(selected,newName,newYear,newDetails);
+              } }> 
+      Update Card 
+      </button>
+
+      <button
+              onClick={() => {
+                deleteCompany(selected);
+              } }
+            >
+              {" "}
+              Delete User
+
+      </button>
+      <h>{selected}</h>
+      
+      {/* <img src={ url|| "http://via.placeholder.com/300"} alt="firebase-image" /> */}
+
+    </div>
       <div>
         {/* <p>{item.logo}</p>
         <p>{item.details}</p>
@@ -151,7 +213,7 @@ function Update() {
       Update Card 
       </button>
 
-<button
+      <button
               onClick={() => {
                 deleteCompany(items.id);
               } }
@@ -159,7 +221,7 @@ function Update() {
               {" "}
               Delete User
 
-            </button>
+      </button>
       
       </>
           
