@@ -1,0 +1,98 @@
+@import "mixins";
+@import "variable";
+
+.alignCenter {
+  text-align: -webkit-center;
+}
+
+.formStyle {
+  padding: $spacing-m;
+  border: $main-border black;
+  border-radius: 20px;
+  max-width: 600px;
+  background-color: rgba(255,255,255,0.13);
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+  padding: 50px 35px;
+}
+
+.formGroup {
+  @include display-flex;
+  @include justify-content-between;
+  margin-bottom: $spacing-m;
+  color: rgb(255, 255, 255);
+}
+
+.formControl {
+  width: 200px;
+  margin-left: $spacing-s;
+  color: #ffffff;
+  border: $main-border #ced4da;
+  border-radius: 5px;
+}
+.formButton {
+  margin-top: 20px;
+  width: 50%;
+  background-color: #ffffff;
+  color: #080710;
+  padding: 5px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-color: #02184d;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.label{
+  display: block;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 5px;
+}
+.input{
+  display: block;
+  height: 50px;
+  width: 50%;
+  background-color: rgba(20, 6, 6, 0.07);
+  color:#eaf0fb;
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.formDropdown {
+  margin-top: 20px;
+  width: 30%;
+  background-color: #ffffff;
+  color: #080710;
+  padding: 5px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-color: #02184d;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.h3{
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.smallButton {
+
+  background-color: #ffffff;
+  color: #080710;
+  border-color: #02184d;
+  border-radius: 10px;
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { render } from "react-dom";
 import { storage } from "../firebase-config";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import styles from "./CSS/Form.module.scss";
 
 import { db} from "../firebase-config";
 // import storage from './firebase';
@@ -30,9 +31,9 @@ function Upload() {
 
 
   const createCompany = async () => {
-      console.log("Start Uploading.....");
+      alert("Start Uploading.....");
     await addDoc(CompanyColltectionRef, { name: newName, years: newYear ,  logo: url ,details: newDetails});
-    console.log("Uploaded");
+    alert("Uploaded");
     
   };
 
@@ -60,6 +61,7 @@ function Upload() {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             console.log('File available at', downloadURL);
+            alert('File available at', downloadURL);
             setUrl(downloadURL);
           });
       }
@@ -69,37 +71,68 @@ function Upload() {
 //   console.log("image: ", image);
 
   return (
-    <div>
+    <div className={styles.alignCenter}>
+      <div className={styles.formStyle}>
+      
+      <h3 className={styles.h3}> Upload Company Cards </h3>
+      <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="name">
+              Name
+        </label>
+        <input className={styles.input}
+          placeholder="Name..."
+          onChange={(event) => {
+            setNewName(event.target.value);
+          }}
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+      <label className={styles.label} htmlFor="name">
+              Description
+        </label>   
+      <input className={styles.input}
+        placeholder="Description ...."
+        onChange={(event) => {
+          setNewDetails(event.target.value);
+        }}
+      />
+      
+      </div> 
+
+      <div className={styles.formGroup}>
+      <label className={styles.label} htmlFor="name">
+              Year
+      </label>
+      <input className={styles.input}
+        placeholder="Years..."
+        onChange={(event) => {
+          setNewYear(event.target.value);
+        }}
+      />
+      </div>
+      <div className={styles.formGroup}>
+      <label className={styles.label} htmlFor="name">
+              Add Company Image
+      </label>
+      </div>
+      
+      
+      
+      <input className={styles.smallButton} type="file" onChange={handleChange} />
+      <br />
+      <br />
       <progress value={progress} max="100" />
       <br />
       <br />
-      <input type="file" onChange={handleChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <button className={styles.smallButton} onClick={handleUpload}>Upload</button>
       <br />
       {url}
       <br />
       <img src={url || "http://via.placeholder.com/300"} alt="firebase-image" />
 
-      <input
-        placeholder="Name..."
-        onChange={(event) => {
-          setNewName(event.target.value);
-        }}
-      />
-      <input
-        placeholder="details ...."
-        onChange={(event) => {
-          setNewDetails(event.target.value);
-        }}
-      />
-      <input
-        placeholder="years..."
-        onChange={(event) => {
-          setNewYear(event.target.value);
-        }}
-      />
-
-      <button onClick={createCompany}> Add Company</button>
+      <button className={styles.formButton} onClick={createCompany}> Add Company</button>
+      </div>
     </div>
   );
 }

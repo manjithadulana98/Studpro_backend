@@ -24,6 +24,8 @@ import {
   doc,
 } from "firebase/firestore";
 
+import styles from "./CSS/Form.module.scss";
+
 
 function Update() {
   const [imageUpload, setImageUpload] = useState(null);
@@ -88,162 +90,84 @@ function Update() {
     console.log(event.target.value);
     setSelected(event.target.value);
   };
+  
  
   return (
-    <div>
-      <div>
-      <select value={selected} onChange={handleChange}>
-        {companys.map(option => (
-          <><option key={option.id} value={option.id}>
-            {option.name}
-          </option></>
-          
-        ))}
-      </select>
+    <div className={styles.alignCenter}>
+      <div className={styles.formStyle}>
 
-      <div>
-        <input
-        placeholder="Name..."
-        onChange={(event) => {
-          setNewName(event.target.value);
-        }}
-      />
-      </div> 
-      <div>
-      <input
-        placeholder="details ...."
-        onChange={(event) => {
-          setNewDetails(event.target.value);
-        }}
-      />
-      </div>
-      <div>
-      <input
-        placeholder="years..."
-        onChange={(event) => {
-          setNewYear(event.target.value);
-        }}
-      />
-      </div>
-      <button onClick={() => {
-                updateUser(selected,newName,newYear,newDetails);
-              } }> 
-      Update Card 
-      </button>
-
-      <button
-              onClick={() => {
-                deleteCompany(selected);
-              } }
-            >
-              {" "}
-              Delete User
-
-      </button>
-      <h>{selected}</h>
-      
-      {/* <img src={ url|| "http://via.placeholder.com/300"} alt="firebase-image" /> */}
-
-    </div>
-      <div>
-        {/* <p>{item.logo}</p>
-        <p>{item.details}</p>
-        <p>{item.years}</p>
-        <p>{item.name}</p> */}
-
-      <input
-        placeholder="Name..."
-        onChange={(event) => {
-          setNewName(event.target.value);
-        }}
-      />
-      <input
-        placeholder="details ...."
-        onChange={(event) => {
-          setNewDetails(event.target.value);
-        }}
-      />
-      <input
-        placeholder="years..."
-        onChange={(event) => {
-          setNewYear(event.target.value);
-        }}
-      />
-
-      <button onClick={createCompany}> Add Company</button>
-
-      
-      <div>
-        <h1>Update and Delete Company Cards</h1>
-      {companys.map((items) => {
-        return(
-        <>
-        <div></div>
-        <h>{items.name}</h>
+      <h3 className={styles.h3}> Update Company Cards </h3>
+        
+        <select  className={styles.formDropdown} value={selected} onChange={handleChange}>
+          {companys.map(option => (
+            <><option key={option.id} value={option.id}>
+              {option.name}
+            </option></>
             
-        
-        <div>
-        <input
-        placeholder="Name..."
-        onChange={(event) => {
-          setNewName(event.target.value);
-        }}
-      />
-      </div> 
-      <div>
-      <input
-        placeholder="details ...."
-        onChange={(event) => {
-          setNewDetails(event.target.value);
-        }}
-      />
-      </div>
-      <div>
-      <input
-        placeholder="years..."
-        onChange={(event) => {
-          setNewYear(event.target.value);
-        }}
-      />
-      </div>
+          ))}
+        </select>
 
-      <button onClick={() => {
-                updateUser(items.id,newName,newYear,newDetails);
-              } }> 
-      Update Card 
-      </button>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="name">
+                Name
+          </label>
+          <input className={styles.input}
+          placeholder="Name..."
+          onChange={(event) => {
+            setNewName(event.target.value);
+          }}
+        />
+        </div> 
+        <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="name">
+              Details
+        </label>
+        <input className={styles.input}
+          placeholder="details ...."
+          onChange={(event) => {
+            setNewDetails(event.target.value);
+          }}
+        />
+        </div>
+        <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="name">
+              Years
+        </label>
+        <input className={styles.input}
+          placeholder="years..."
+          onChange={(event) => {
+            setNewYear(event.target.value);
+          }}
+        />
+        </div>
 
-      <button
-              onClick={() => {
-                deleteCompany(items.id);
-              } }
+          <div className={styles.formGroup}>
+            <button className={styles.formButton} onClick={() => {
+                      updateUser(selected,newName,newYear,newDetails);
+                    } }> 
+            Update Card 
+            </button>
+          </div>
+          <div className={styles.formGroup}>
+            <button className={styles.formButton}
+              onClick={() => {deleteCompany(selected);} }
             >
               {" "}
-              Delete User
+              Delete Card
+            </button>
+          </div>
 
-      </button>
+      <h>{selected}</h>
+    </div>
       
-      </>
-          
-
-          
-        
-        
-        )
-      })}
-
-      
-      </div>
-
-      </div>
       
 
       
   
   </div>
   
-  )
+  )}
 
-}
+
 
 export default Update
